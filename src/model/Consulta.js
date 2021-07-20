@@ -19,7 +19,7 @@ var Consulta = sequelize.define('consulta', {
       hora_consulta: Sequelize.TIME,
       dia_consulta: Sequelize.STRING,
       utente_prioritario: Sequelize.BOOLEAN,
-
+/*
       id_utente: {
         type: Sequelize.INTEGER,
         references: {
@@ -29,7 +29,7 @@ var Consulta = sequelize.define('consulta', {
       },
 
 //Chave estrangeira (id funcionario de funcionario)
-      
+      dfrtgtrgr
 
    /*  */
 },
@@ -45,11 +45,20 @@ timestamps: false,
 //////////////////////////////////////
 
 
-/*Consulta.hasOne(Funcionario, {foreignKey: { allowNull: false, type: Sequelize.INTEGER }});
-Funcionario.belongsTo(Consulta);  // vai retornar a FK id_funcionario relativo a tabela funcionario */
+Consulta.hasOne(Funcionario, {foreignKey: { allowNull: false, type: Sequelize.INTEGER }});
+Funcionario.belongsTo(Consulta); 
+
+
+Consulta.hasOne(Utente, {foreignKey: { allowNull: false, type: Sequelize.INTEGER }});
+Utente.belongsTo(Consulta); 
+
+
+
+
 
 //Funcionario
 
+/*
 Consulta.associate= (models) =>
 {
   
@@ -65,9 +74,10 @@ Consulta.associate= (models) =>
     allowNull:false,
   });
 
-/**/
-};
 
+
+};
+/**/
 
 
 module.exports = Consulta;
