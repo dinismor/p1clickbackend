@@ -21,10 +21,13 @@ router.post("/create", userController.consulta_utente); //marcar consulta utente
 router.post('/create_temp', userController.consulta_temporaria); //marcar consulta utente temporária
 router.post("/update/:id", userController.consulta_update);
 router.post("/delete", userController.consulta_delete);
+router.post("/update_utente/:id", utenteController.utente_update);
 
 //------------------------Utentes----------------------
-router.get("/list_utente/:id", utenteController.utente_list);
+router.get("/list_utente", utenteController.utente_list);
 router.get("/get_utente/:id", utenteController.utente_detail);
 router.post('/registo_create',utenteController.registo_create);
+router.post("/delete_utente", utenteController.utente_delete);
+
 
 module.exports = router;

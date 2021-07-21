@@ -108,38 +108,48 @@ controllers_utente.user_list = async (req, res) => {
 
 //criar utente
 controllers_utente.registo_create = async (req, res) => {
-    // data
-    const { nome, apelido, telefone, nutentesaude, email, password } = req.body;
-    // create
-    const data = await Utente.create({
-        nome: nome,
-        apelido: apelido,
-        telefone: telefone,
-        n_utente_saude: nutentesaude,
-        email: email,
-        password: password
-    })
-        .then(function (data) {
-            return data;
-        })
-        .catch(error => {
-            console.log("Erro: " + error)
-            return error;
-        })
-    // return res
-    res.status(200).json({
-        success: true,
-        message: "Registado",
-        data: data
-    });
+  // data
+  const { nome, apelido, email,data_nascimento,localidade, codigopostal, telefone, prioritario, autonomo, n_utente_saude, palavra_passe} = req.body;
+  // create
+  const data = await Utente.create({
+      nome: nome,
+      apelido: apelido,
+      email: email,
+
+      data_nascimento: data_nascimento,
+      localidade: localidade,
+      codigo_postal: codigopostal,
+      telefone: telefone,
+      prioritario: prioritario,
+  
+      autonomo: autonomo,
+      n_utente_saude: n_utente_saude,
+      palavra_passe: palavra_passe
+      
+      
+  })
+      .then(function (data) {
+          return data;
+      })
+      .catch(error => {
+          console.log("Erro: " + error)
+          return error;
+      })
+  // return res
+  res.status(200).json({
+      success: true,
+      message: "Utente Registado",
+      data: data
+  });
 }
+
 
  
  //---------------------------------------ADMIN LISTAR UTENTE---------------------------------------------  
  controllers_utente.utente_list = async (req, res) => {
-   const {utenteId} = req.params;
+  
     const data = await Utente.findAll({
-        where: { id: utenteId },
+       
     })
         .then(function (data) {
             return data;
@@ -154,7 +164,7 @@ controllers_utente.registo_create = async (req, res) => {
   controllers_utente.utente_detail = async (req, res) => {
     const { id } = req.params;
     const data = await Utente.findAll({
-        where: { id_utente: id },
+        where: { id: id },
         
     })
         .then(function (data) {
@@ -166,4 +176,56 @@ controllers_utente.registo_create = async (req, res) => {
     res.json({ success: true, data: data });
   }
   
+
+
+  controllers_utente.utente_delete = async (req, res) => {
+    // parâmetros por post
+    const { id } = req.body;
+    // delete por sequelize
+    const del = await Utente.destroy({
+      where: { id: id },
+    });
+    res.json({ success: true, deleted: del, message: "Utente removido!" });
+  };
+
+
+
+
+  controllers_utente.utente_update = async (req, res) => {
+    //get id
+    const {id} = req.params;
+  
+    const { nome, apelido, email, localidade, telefone } = req.body;
+    // Update
+    const data = await Utente.update(
+      {
+        nome: nome,
+        apelido: apelido,
+        email: email,
+        localidade: localidade,
+        telefone: telefone
+      },
+      {
+        where: { id:id},
+      }
+    )
+      .then(function (data) {
+        return data;
+      })
+      .catch((error) => {
+        return error;
+      });
+    res.json({
+      success: true,
+      data: data,
+      message: "Utente editado com sucesso",
+    });
+  };
+
+
+
+
+
+
+
   module.exports = controllers_utente;

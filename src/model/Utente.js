@@ -22,7 +22,7 @@ var Utente = sequelize.define('utente',
     codigo_postal: Sequelize.STRING,
     telefone: Sequelize.INTEGER,
     prioritario: Sequelize.BOOLEAN,
-    qrcode: Sequelize.CHAR,
+    
     autonomo: Sequelize.BOOLEAN,
     n_utente_saude: Sequelize.INTEGER,
     palavra_passe: {

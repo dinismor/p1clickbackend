@@ -109,7 +109,7 @@ controllers.consulta_list = async (req, res) => {
 controllers.consulta_detail = async (req, res) => {
   const { id } = req.params;
   const data = await Consulta.findAll({
-    where: { id_consulta: id },
+    where: { id: id },
     //include: [role],
   })
     .then(function (data) {
@@ -147,7 +147,7 @@ controllers.consulta_update = async (req, res) => {
       //telefone: telefone,
     },
     {
-      where: { id_consulta: id },
+      where: { id: id },
     }
   )
     .then(function (data) {
@@ -168,7 +168,7 @@ controllers.consulta_delete = async (req, res) => {
   const { id } = req.body;
   // delete por sequelize
   const del = await Consulta.destroy({
-    where: { id_consulta: id },
+    where: { id: id },
   });
   res.json({ success: true, deleted: del, message: "Consulta removida" });
 };
